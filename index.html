@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improved Carnival</title>
+    <style>
+        :root {
+            --focus-ring-color: #2563eb;
+            --bg-color: #ffffff;
+            --text-color: #1f2937;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        /* ♿ Accessibility: Skip to Content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--focus-ring-color);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.2s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ♿ Accessibility: Visible focus styles */
+        :focus-visible {
+            outline: 3px solid var(--focus-ring-color);
+            outline-offset: 2px;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.25rem;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <main id="main-content">
+        <h1>Welcome to Improved Carnival</h1>
+        <p>A project dedicated to a delightful, accessible, and secure user experience.</p>
+        <p>This application is currently under development. Check back soon for updates!</p>
+    </main>
+</body>
+</html>
