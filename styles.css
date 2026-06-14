@@ -1,0 +1,69 @@
+:root {
+    --focus-ring-color: #2563eb;
+    --bg-color: #ffffff;
+    --text-color: #1f2937;
+    --text-muted: #4b5563;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --focus-ring-color: #3b82f6;
+        --bg-color: #111827;
+        --text-color: #f9fafb;
+        --text-muted: #9ca3af;
+    }
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 2rem;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+/* ♿ Accessibility: Skip to Content link */
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--focus-ring-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    /* ⚡ Bolt: Use transform for hardware-accelerated transitions (Composite stage only) */
+    transform: translateY(-100%);
+    transition: transform 0.2s;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* ♿ Accessibility: Visible focus styles */
+:focus-visible {
+    outline: 3px solid var(--focus-ring-color);
+    outline-offset: 2px;
+}
+
+header,
+main,
+footer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 0;
+    /* ⚡ Bolt: Use layout containment to limit the scope of reflows and repaints */
+    contain: layout;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
