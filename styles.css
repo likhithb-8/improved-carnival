@@ -1,0 +1,57 @@
+:root {
+    --focus-ring-color: #2563eb;
+    --bg-color: #ffffff;
+    --text-color: #1f2937;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 2rem;
+}
+
+/* ♿ Accessibility: Skip to Content link */
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--focus-ring-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    /* ⚡ Bolt: Use transform for hardware-accelerated transitions (Composite stage only) */
+    transform: translateY(-100%);
+    transition: transform 0.2s;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* ♿ Accessibility: Visible focus styles */
+:focus-visible {
+    outline: 3px solid var(--focus-ring-color);
+    outline-offset: 2px;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    /* ⚡ Bolt: Use content containment (layout + paint) to isolate the rendering logic
+       for this landmark, allowing the browser to skip painting the element's
+       contents if it's off-screen. */
+    contain: content;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1.25rem;
+    color: #4b5563;
+}
