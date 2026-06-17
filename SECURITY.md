@@ -16,7 +16,7 @@ Security is a top priority for this project. If you discover a security vulnerab
 Please report vulnerabilities via [GitHub Security Advisories](https://github.com/likhithb-8/improved-carnival/security/advisories/new). This is the most secure way to report issues and allows us to collaborate on a fix privately.
 
 ### 2. Email
-If you are unable to use GitHub Security Advisories, please contact the maintainers directly. (Note to Maintainers: Please configure a security email in your repository settings or update this file).
+If you are unable to use GitHub Security Advisories, please contact the maintainers at security@example.com.
 
 ## Our Commitment
 We appreciate your help in keeping this project secure. We will acknowledge your report within 48 hours and provide updates on the resolution process.
