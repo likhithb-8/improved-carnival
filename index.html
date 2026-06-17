@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 🛡️ Sentinel: Referrer policy to protect user privacy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- 🛡️ Sentinel: Strict CSP to mitigate XSS and clickjacking -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'self'; font-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests; require-trusted-types-for 'script';">
+    <!-- 🛡️ Sentinel: Permissions Policy to disable unused browser features -->
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    <title>Improved Carnival</title>
+    <link rel="stylesheet" href="styles.css" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <main id="main-content">
+        <h1>Welcome to Improved Carnival</h1>
+        <p>A project dedicated to a delightful, accessible, and secure user experience.</p>
+        <p>This application is currently under development. Check back soon for updates!</p>
+    </main>
+
+    <footer>
+        <nav aria-label="Security links">
+            <a href="SECURITY.md">Security Policy</a>
+        </nav>
+    </footer>
+</body>
+</html>
