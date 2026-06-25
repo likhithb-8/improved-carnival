@@ -1,0 +1,4 @@
+Contact: https://github.com/likhithb-8/improved-carnival/security/advisories/new
+Expires: 2027-06-24T00:00:00.000Z
+Preferred-Languages: en
+Policy: https://github.com/likhithb-8/improved-carnival/blob/main/SECURITY.md

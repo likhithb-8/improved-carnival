@@ -1,0 +1,6 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["security"],
+  "extends": ["plugin:security/recommended-legacy"]
+}
