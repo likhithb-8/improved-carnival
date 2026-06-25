@@ -1,0 +1,192 @@
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+:root {
+    --focus-ring-color: #2563eb;
+    --link-color: #2563eb;
+    --link-hover-color: #1d4ed8;
+    --bg-color: #ffffff;
+    --text-color: #1f2937;
+    --text-muted: #4b5563;
+    --status-indicator-color: #10b981;
+    --status-indicator-pulse-glow: rgba(16, 185, 129, 0.7);
+    --status-indicator-pulse-shadow: rgba(16, 185, 129, 0.4);
+    --selection-bg: rgba(37, 99, 235, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --focus-ring-color: #3b82f6;
+        --bg-color: #111827;
+        --text-color: #f9fafb;
+        --text-muted: #9ca3af;
+        --link-color: #60a5fa;
+        --link-hover-color: #93c5fd;
+        --status-indicator-color: #34d399;
+        --status-indicator-pulse-glow: rgba(52, 211, 153, 0.7);
+        --status-indicator-pulse-shadow: rgba(52, 211, 153, 0.4);
+        --selection-bg: rgba(59, 130, 246, 0.3);
+    }
+}
+
+::selection {
+    background-color: var(--selection-bg);
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 2rem;
+    transition: color 0.3s, background-color 0.3s;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip to Content link */
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--focus-ring-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    /* Use transform for hardware-accelerated transitions (Composite stage only) */
+    transform: translateY(-100%);
+    transition: transform 0.2s;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* Visible focus styles */
+:focus-visible {
+    outline: 3px solid var(--focus-ring-color);
+    outline-offset: 2px;
+}
+
+header,
+main,
+footer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 0;
+    /* Use layout containment to limit the scope of reflows and repaints */
+    contain: layout;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--text-muted);
+    margin-top: 2rem;
+    opacity: 0.8;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+}
+
+.lead {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--focus-ring-color);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+.status-badge::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-indicator-color);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 var(--status-indicator-pulse-shadow);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 var(--status-indicator-pulse-glow);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px transparent;
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .status-badge::before {
+        animation: none;
+    }
+}
+
+a:not(.skip-link) {
+    color: var(--link-color);
+    text-underline-offset: 4px;
+    transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+a:not(.skip-link):hover {
+    color: var(--link-hover-color);
+}
