@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Improved Carnival: A project dedicated to a delightful, accessible, and secure user experience.">
+    <!-- 🛡️ Sentinel: Mitigate information leakage during cross-origin requests -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <!-- Optimize perceived performance by informing the browser of supported color schemes -->
     <meta name="color-scheme" content="light dark">
-    <!-- Strict CSP to mitigate XSS and clickjacking -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;">
+    <!-- 🛡️ Sentinel: Strict CSP to mitigate XSS. Note: frame-ancestors is not supported in meta tags. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
     <title>Improved Carnival</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- 🛡️ Sentinel: Ensure consistent security treatment of local resources -->
+    <link rel="stylesheet" href="styles.css" crossorigin="anonymous">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
