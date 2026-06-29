@@ -96,8 +96,9 @@ footer {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    /* Use layout containment to limit the scope of reflows and repaints */
-    contain: layout;
+    /* Optimize rendering by skipping layout and paint for off-screen content */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 100px;
 }
 
 footer p {
