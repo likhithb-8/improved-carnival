@@ -27,6 +27,8 @@ html {
     --status-indicator-color: #10b981;
     --status-indicator-pulse-glow: rgba(16, 185, 129, 0.7);
     --status-indicator-pulse-shadow: rgba(16, 185, 129, 0.4);
+    --selection-bg: #bfdbfe;
+    --selection-text: #1e40af;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,6 +42,8 @@ html {
         --status-indicator-color: #34d399;
         --status-indicator-pulse-glow: rgba(52, 211, 153, 0.7);
         --status-indicator-pulse-shadow: rgba(52, 211, 153, 0.4);
+        --selection-bg: #1e40af;
+        --selection-text: #eff6ff;
     }
 }
 
@@ -53,13 +57,19 @@ body {
     transition: color 0.3s, background-color 0.3s;
 }
 
+/* 🎨 Palette: Custom text selection colors */
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
+}
+
 /* ♿ Accessibility: Skip to Content link */
 .skip-link {
     position: absolute;
     top: 0;
     left: 0;
     background: var(--focus-ring-color);
-    color: white;
+    color: var(--bg-color);
     padding: 8px;
     z-index: 100;
     /* Use transform for hardware-accelerated transitions (Composite stage only) */
