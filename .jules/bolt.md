@@ -1,0 +1,3 @@
+## 2026-06-29 - Leveraging `content-visibility` for Footer Optimization
+**Learning:** Applying `content-visibility: auto` along with `contain-intrinsic-size` (e.g., `auto 100px`) to the `footer` provides superior performance compared to `contain: layout`. It allows the browser to skip both layout and paint calculations for off-screen content, significantly reducing the initial rendering cost for pages with long content or complex footers.
+**Action:** Prefer `content-visibility: auto` over `contain: layout` or `contain: content` for large off-screen landmarks like footers or sidebars to improve TBT (Total Blocking Time) and INP (Interaction to Next Paint).
