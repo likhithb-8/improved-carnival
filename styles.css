@@ -24,6 +24,8 @@ html {
     --bg-color: #ffffff;
     --text-color: #1f2937;
     --text-muted: #4b5563;
+    --selection-bg: #bfdbfe;
+    --selection-text: #1e40af;
     --status-indicator-color: #10b981;
     --status-indicator-pulse-glow: rgba(16, 185, 129, 0.7);
     --status-indicator-pulse-shadow: rgba(16, 185, 129, 0.4);
@@ -35,6 +37,8 @@ html {
         --bg-color: #111827;
         --text-color: #f9fafb;
         --text-muted: #9ca3af;
+        --selection-bg: #1e40af;
+        --selection-text: #eff6ff;
         --link-color: #60a5fa;
         --link-hover-color: #93c5fd;
         --status-indicator-color: #34d399;
@@ -75,6 +79,12 @@ body {
 :focus-visible {
     outline: 3px solid var(--focus-ring-color);
     outline-offset: 2px;
+}
+
+/* 🎨 Palette: Theme-aware text selection */
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
 }
 
 header,
