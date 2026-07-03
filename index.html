@@ -6,10 +6,13 @@
     <meta name="description" content="Improved Carnival: A project dedicated to a delightful, accessible, and secure user experience.">
     <!-- Optimize perceived performance by informing the browser of supported color schemes -->
     <meta name="color-scheme" content="light dark">
-    <!-- Strict CSP to mitigate XSS and clickjacking -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;">
+    <!-- 🛡️ Sentinel: Strict Referrer Policy to protect user privacy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- 🛡️ Sentinel: Strict CSP to mitigate XSS -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
     <title>Improved Carnival</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- 🛡️ Sentinel: Secure resource loading -->
+    <link rel="stylesheet" href="styles.css" crossorigin="anonymous">
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
