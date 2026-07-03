@@ -5,3 +5,7 @@
 ## 2026-06-13 - Semantic Landmarks and Navigation
 **Learning:** Establishing semantic landmarks like `<header>` and `<footer>` early ensures that screen reader users can navigate the structure of the site efficiently from day one. Additionally, including core documents like the Security Policy in the footer improves transparency and trust.
 **Action:** Always wrap top-level content in appropriate semantic landmarks to provide clear navigation paths for assistive technologies.
+
+## 2026-06-29 - Theme-Aware Selection Colors
+**Learning:** Default text selection colors often clash with brand palettes or provide insufficient contrast, especially when switching between light and dark modes. Implementing theme-aware `::selection` styles ensures visual harmony and maintains accessibility across all color schemes.
+**Action:** Use CSS variables to define `--selection-bg` and `--selection-text` for both light and dark modes to ensure consistent brand experience and high contrast.
