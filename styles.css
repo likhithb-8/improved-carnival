@@ -59,7 +59,7 @@ body {
     top: 0;
     left: 0;
     background: var(--focus-ring-color);
-    color: white;
+    color: var(--bg-color);
     padding: 8px;
     z-index: 100;
     /* Use transform for hardware-accelerated transitions (Composite stage only) */
