@@ -132,6 +132,7 @@ p {
 }
 
 .status-badge {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -143,6 +144,8 @@ p {
     color: var(--text-color);
     margin-bottom: 2rem;
     transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    /* Create a local stacking context to manage z-index of pulse effects */
+    isolation: isolate;
 }
 
 .status-badge::before {
@@ -152,27 +155,55 @@ p {
     background-color: var(--status-indicator-color);
     border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 0 0 0 var(--status-indicator-pulse-shadow);
-    animation: pulse 2s infinite;
+    /* Composite optimization: use transform instead of box-shadow for the dot's subtle scale */
+    animation: pulse-dot 2s infinite;
 }
 
-@keyframes pulse {
-    0% {
+/* Composite optimization: use a separate pseudo-element for the pulse ring */
+.status-badge::after {
+    content: "";
+    position: absolute;
+    /* Align perfectly with the ::before dot */
+    left: 1rem;
+    top: 50%;
+    margin-top: -4px; /* Half of height to center vertically */
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-indicator-pulse-glow);
+    border-radius: 50%;
+    /* Place behind the dot but above the badge background thanks to isolation: isolate */
+    z-index: -1;
+    /* Composite optimization: use transform and opacity for hardware-accelerated animations */
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
         transform: scale(0.95);
-        box-shadow: 0 0 0 0 var(--status-indicator-pulse-glow);
     }
     70% {
         transform: scale(1);
-        box-shadow: 0 0 0 6px transparent;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    70% {
+        transform: scale(2.5);
+        opacity: 0;
     }
     100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 transparent;
+        transform: scale(1);
+        opacity: 0;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .status-badge::before {
+    .status-badge::before,
+    .status-badge::after {
         animation: none;
     }
 }
