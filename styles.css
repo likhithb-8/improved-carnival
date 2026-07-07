@@ -27,6 +27,8 @@ html {
     --status-indicator-color: #10b981;
     --status-indicator-pulse-glow: rgba(16, 185, 129, 0.7);
     --status-indicator-pulse-shadow: rgba(16, 185, 129, 0.4);
+    --selection-bg: #bfdbfe;
+    --selection-text: #1e40af;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,7 +42,14 @@ html {
         --status-indicator-color: #34d399;
         --status-indicator-pulse-glow: rgba(52, 211, 153, 0.7);
         --status-indicator-pulse-shadow: rgba(52, 211, 153, 0.4);
+        --selection-bg: #1e40af;
+        --selection-text: #eff6ff;
     }
+}
+
+::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
 }
 
 body {
@@ -61,10 +70,18 @@ body {
     background: var(--focus-ring-color);
     color: white;
     padding: 8px;
+    font-weight: 600;
     z-index: 100;
     /* Use transform for hardware-accelerated transitions (Composite stage only) */
     transform: translateY(-100%);
     transition: transform 0.2s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .skip-link {
+        background: var(--selection-bg);
+        color: var(--selection-text);
+    }
 }
 
 .skip-link:focus {
