@@ -132,6 +132,7 @@ p {
 }
 
 .status-badge {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -143,6 +144,8 @@ p {
     color: var(--text-color);
     margin-bottom: 2rem;
     transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    /* Create a new stacking context to manage pseudo-elements safely without bleed */
+    isolation: isolate;
 }
 
 .status-badge::before {
@@ -152,27 +155,58 @@ p {
     background-color: var(--status-indicator-color);
     border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 0 0 0 var(--status-indicator-pulse-shadow);
-    animation: pulse 2s infinite;
+    /* Use transform for scaling - Composite stage only (hardware accelerated) */
+    animation: pulse-dot 2s infinite;
 }
 
-@keyframes pulse {
-    0% {
+/* Use a separate pseudo-element for the pulse ring to leverage hardware acceleration (transform/opacity) */
+.status-badge::after {
+    content: "";
+    position: absolute;
+    /* Align with the dot: 1rem is the badge's left padding */
+    left: 1rem;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-indicator-color);
+    border-radius: 50%;
+    /* Center vertically and set initial scale */
+    transform: translateY(-50%) scale(0.95);
+    z-index: -1;
+    opacity: 0;
+    /* Hint the browser for layer promotion to ensure smooth 60fps animation */
+    will-change: transform, opacity;
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
         transform: scale(0.95);
-        box-shadow: 0 0 0 0 var(--status-indicator-pulse-glow);
     }
     70% {
         transform: scale(1);
-        box-shadow: 0 0 0 6px transparent;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: translateY(-50%) scale(0.95);
+        opacity: 0.7;
+    }
+    70% {
+        /* Scale up to 2.5x (8px * 2.5 = 20px, equivalent to the original 6px shadow) */
+        transform: translateY(-50%) scale(2.5);
+        opacity: 0;
     }
     100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 transparent;
+        transform: translateY(-50%) scale(0.95);
+        opacity: 0;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .status-badge::before {
+    .status-badge::before,
+    .status-badge::after {
         animation: none;
     }
 }
