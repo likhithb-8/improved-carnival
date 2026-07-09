@@ -132,6 +132,8 @@ p {
 }
 
 .status-badge {
+    position: relative;
+    isolation: isolate;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -152,27 +154,60 @@ p {
     background-color: var(--status-indicator-color);
     border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 0 0 0 var(--status-indicator-pulse-shadow);
-    animation: pulse 2s infinite;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    /* ⚡ Bolt: Use hardware-accelerated transform for the dot pulse */
+    will-change: transform;
+    animation: pulse-dot 2s infinite;
 }
 
-@keyframes pulse {
-    0% {
+/* ⚡ Bolt: Use a separate pseudo-element for the pulse ring to avoid expensive box-shadow animations.
+   This leverages the GPU Composite stage by only animating transform and opacity, avoiding Paint/Layout cycles. */
+.status-badge::after {
+    content: "";
+    position: absolute;
+    /* Alignment: 1rem padding + 4px (half of 8px dot) */
+    left: calc(1rem + 4px);
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-indicator-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    /* ⚡ Bolt: Promote to its own layer for hardware acceleration */
+    will-change: transform, opacity;
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
         transform: scale(0.95);
-        box-shadow: 0 0 0 0 var(--status-indicator-pulse-glow);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
     }
     70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 6px transparent;
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
     }
     100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 transparent;
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .status-badge::before {
+    .status-badge::before,
+    .status-badge::after {
         animation: none;
     }
 }
