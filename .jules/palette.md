@@ -5,3 +5,7 @@
 ## 2026-06-13 - Semantic Landmarks and Navigation
 **Learning:** Establishing semantic landmarks like `<header>` and `<footer>` early ensures that screen reader users can navigate the structure of the site efficiently from day one. Additionally, including core documents like the Security Policy in the footer improves transparency and trust.
 **Action:** Always wrap top-level content in appropriate semantic landmarks to provide clear navigation paths for assistive technologies.
+
+## 2026-06-30 - Focus Management and Selection Polish
+**Learning:** For 'Skip to Content' links to function reliably across all browsers (including those that do not natively manage focus on fragment navigation), the target element (e.g., `<main id="main-content">`) must include `tabindex="-1"` to receive programmatic focus. To maintain visual polish, non-interactive elements receiving programmatic focus should have `outline: none` applied via CSS to avoid disruptive focus indicators, provided that focus is correctly managed and interactive elements within them still maintain their own focus indicators.
+**Action:** Implement `tabindex="-1"` on skip-link targets and suppress the focus outline on those specific non-interactive elements while ensuring branded selection colors enhance the overall UX.
