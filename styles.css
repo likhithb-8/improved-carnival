@@ -60,7 +60,8 @@ body {
     left: 0;
     background: var(--focus-ring-color);
     color: white;
-    padding: 8px;
+    padding: 8px 16px;
+    font-weight: 600;
     z-index: 100;
     /* Use transform for hardware-accelerated transitions (Composite stage only) */
     transform: translateY(-100%);
@@ -75,6 +76,10 @@ body {
 :focus-visible {
     outline: 3px solid var(--focus-ring-color);
     outline-offset: 2px;
+}
+
+main#main-content:focus {
+    outline: none;
 }
 
 header,
