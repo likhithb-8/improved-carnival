@@ -142,9 +142,18 @@ p {
     font-size: 0.875rem;
     color: var(--text-color);
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 0;
     transition: color 0.3s, background-color 0.3s, border-color 0.3s;
 }
 
+/*
+ * PERFORMANCE OPTIMIZATION: Hardware-accelerated pulse animation.
+ * Animating 'box-shadow' triggers expensive Paint stages.
+ * We replace the box-shadow pulse with transform and opacity animations
+ * on the ::before and ::after pseudo-elements. This delegates processing to the GPU's
+ * Composite stage, achieving 60fps and lowering CPU/main thread usage.
+ */
 .status-badge::before {
     content: "";
     width: 8px;
@@ -152,28 +161,57 @@ p {
     background-color: var(--status-indicator-color);
     border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 0 0 0 var(--status-indicator-pulse-shadow);
-    animation: pulse 2s infinite;
+    position: relative;
+    z-index: 2; /* Keep dot visible above pulse ring */
+    will-change: transform;
+    animation: pulse-dot 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
-@keyframes pulse {
-    0% {
+.status-badge::after {
+    content: "";
+    position: absolute;
+    left: 1rem; /* Aligns with padding start of badge */
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-indicator-color);
+    border-radius: 50%;
+    z-index: 1; /* Render behind the inner dot */
+    will-change: transform, opacity;
+    animation: pulse-ring 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
         transform: scale(0.95);
-        box-shadow: 0 0 0 0 var(--status-indicator-pulse-glow);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.8;
     }
     70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 6px transparent;
+        transform: translateY(-50%) scale(3.5);
+        opacity: 0;
     }
     100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 transparent;
+        transform: translateY(-50%) scale(1);
+        opacity: 0;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .status-badge::before {
         animation: none;
+    }
+    .status-badge::after {
+        animation: none;
+        display: none;
     }
 }
 
